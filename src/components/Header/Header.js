@@ -7,7 +7,7 @@ export default function Header() {
         <span role="img" aria-labelledby="anchor">
           ⚓
         </span>
-        React Table Using Hook
+        Leverage Product
       </span>
     </nav>
   );

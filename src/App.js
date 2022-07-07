@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <div className="container mt-3">
+        <div className="container mt-3" style={{ maxWidth: '95%'}}>
           <Content />
         </div>
       </div>
