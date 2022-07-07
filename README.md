@@ -3,6 +3,11 @@
 
 [![ReactHook](https://raw.githubusercontent.com/PJijin/React-Material-Table-with-Hooks/master/preview.png?raw=true "ReactHook")]()
 
+Installation
+
+npm install
+npm run start
+
 ## 📦 Packages
 
 1. Material Table: https://github.com/mbrn/material-table 
