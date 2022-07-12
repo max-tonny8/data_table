@@ -43,10 +43,48 @@ const fliTokenDetails = [
     manage_address: "0xf41acb71f9af89546c133944141b400168fe2da1",
     strategy_extension_address: ["0x3BD4ca36a513dA012Fa77BC471E35F844425a0af", "0x460EF681713448C50392824317fC2D883b722812"],
   },
+  {
+    product: "ETH2x-FLI-P",
+    token_address: "0xaa6e8127831c9de45ae56bb1b0d4d4da6e5665bd",
+    keeper_address: "0xEa80829C827f1633A46E7EA6026Ed693cA54eebD",
+    manage_address: "0x0749CE17c983Deb806D6b841c65b7359C3d5b104",
+    strategy_extension_address: ["0x9ba41a2c5175d502ea52ff9a666f8a4fc00c00a1", "0xe833C90F4d07650aC1d8a915C2c0fdDBEDC1ec3A"],
+  },
+  {
+    product: "ETH2x-FLI",
+    token_address: "0xaa6e8127831c9de45ae56bb1b0d4d4da6e5665bd",
+    keeper_address: "0xEa80829C827f1633A46E7EA6026Ed693cA54eebD",
+    manage_address: "0x0749CE17c983Deb806D6b841c65b7359C3d5b104",
+    strategy_extension_address: ["0x9ba41a2c5175d502ea52ff9a666f8a4fc00c00a1", "0xe833C90F4d07650aC1d8a915C2c0fdDBEDC1ec3A"],
+  },
+  {
+    product: "BTC2x-FLI",
+    token_address: "0x0b498ff89709d3838a063f1dfa463091f9801c2b",
+    keeper_address: "0xCBEb906f46eA0b9D7e7e75379fAFbceACd1aAeff",
+    manage_address: "0x3b439351177fC9d7b5fd11aEdCc177D73F989341",
+    strategy_extension_address: ["0xFD4eA597E8346a6723FA4A06a31E4b6F7F37e9Ad", "0x5e568E47C52E8af9dB47e52D0Ae7c740f8f85BF1"],
+  }
 ];
 
 export default function Content() {
   const [data, setData] = useState([]);
+  const [columns, setColumns] = useState([
+    { title: "Product", field: "product" },
+    { title: "Token Address", field: "token_address", render: rowData => <a href={"https://etherscan.io/address/"+rowData.token_address}>{rowData.token_address}</a> },
+    { title: "Chain", field: "chain" },
+    { title: "Keeper Wallet", field: "keeper_wallet", render: rowData => <a href={"https://etherscan.io/address/"+rowData.keeper_wallet}>{rowData.keeper_wallet}</a> },
+    { title: "Wallet Balance", field: "wallet_balance" },
+    { title: "Manager address", field: "manage_address", render: rowData => <a href={"https://etherscan.io/address/"+rowData.manage_address}>{rowData.manage_address}</a> },
+    {
+      title: "FlexibleLeverageStrategyExtension address",
+      field: "strategy_extension_address",
+      render: rowData => <a href={"https://etherscan.io/address/"+rowData.strategy_extension_address}>{rowData.strategy_extension_address}</a> 
+    },
+    { title: "Current Leverage Ratio", field: "current_leverage_ratio" },
+    { title: "Target Leverage", field: "target_leverage_ratio" },
+    { title: "Min Leverage", field: "min_leverage_ratio" },
+    { title: "Max Leverage", field: "max_leverage_ratio" },
+  ])
   useEffect(() => {
     const web3Eth = new Web3(
       new Web3.providers.HttpProvider(
@@ -247,6 +285,117 @@ export default function Content() {
         });
         
       }
+      if (item.product === "ETH2x-FLI") {
+        const bal = await web3Eth.eth.getBalance(item.keeper_address);
+
+        item.strategy_extension_address.map(async (extension_address) => {
+          try {
+            const pol_instance = new web3Eth.eth.Contract(
+              eth_ABI,
+              extension_address
+            );
+            const leverage_data = await pol_instance.methods
+              .getMethodology()
+              .call();
+            result.push({
+              product: item.product,
+              token_address: item.token_address,
+              chain: "Polygon",
+              keeper_wallet: item.keeper_address,
+              wallet_balance: (bal / 10 ** 18).toFixed(4) + " MATIC",
+              manage_address: item.manage_address,
+              strategy_extension_address: extension_address,
+              current_leverage_ratio:
+                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              target_leverage_ratio:
+                leverage_data.targetLeverageRatio / 10 ** 18 + "x",
+              min_leverage_ratio:
+                leverage_data.minLeverageRatio / 10 ** 18 + "x",
+              max_leverage_ratio:
+                leverage_data.maxLeverageRatio / 10 ** 18 + "x",
+            });
+            index++;
+            if (index === fliTokenDetails.length) {
+              setData(result);
+            }
+          } catch (e) {}
+        });
+        
+      }
+      if (item.product === "BTC2x-FLI") {
+        const bal = await web3Eth.eth.getBalance(item.keeper_address);
+
+        item.strategy_extension_address.map(async (extension_address) => {
+          try {
+            const pol_instance = new web3Eth.eth.Contract(
+              eth_ABI,
+              extension_address
+            );
+            const leverage_data = await pol_instance.methods
+              .getMethodology()
+              .call();
+            result.push({
+              product: item.product,
+              token_address: item.token_address,
+              chain: "Polygon",
+              keeper_wallet: item.keeper_address,
+              wallet_balance: (bal / 10 ** 18).toFixed(4) + " MATIC",
+              manage_address: item.manage_address,
+              strategy_extension_address: extension_address,
+              current_leverage_ratio:
+                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              target_leverage_ratio:
+                leverage_data.targetLeverageRatio / 10 ** 18 + "x",
+              min_leverage_ratio:
+                leverage_data.minLeverageRatio / 10 ** 18 + "x",
+              max_leverage_ratio:
+                leverage_data.maxLeverageRatio / 10 ** 18 + "x",
+            });
+            index++;
+            if (index === fliTokenDetails.length) {
+              setData(result);
+            }
+          } catch (e) {}
+        });
+        
+      }
+      if (item.product === "ETH2x-FLI-P") {
+        const bal = await web3Polygon.eth.getBalance(item.keeper_address);
+
+        item.strategy_extension_address.map(async (extension_address) => {
+          try {
+            const pol_instance = new web3Polygon.eth.Contract(
+              eth_ABI,
+              extension_address
+            );
+            const leverage_data = await pol_instance.methods
+              .getMethodology()
+              .call();
+            result.push({
+              product: item.product,
+              token_address: item.token_address,
+              chain: "Polygon",
+              keeper_wallet: item.keeper_address,
+              wallet_balance: (bal / 10 ** 18).toFixed(4) + " MATIC",
+              manage_address: item.manage_address,
+              strategy_extension_address: extension_address,
+              current_leverage_ratio:
+                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              target_leverage_ratio:
+                leverage_data.targetLeverageRatio / 10 ** 18 + "x",
+              min_leverage_ratio:
+                leverage_data.minLeverageRatio / 10 ** 18 + "x",
+              max_leverage_ratio:
+                leverage_data.maxLeverageRatio / 10 ** 18 + "x",
+            });
+            index++;
+            if (index === fliTokenDetails.length) {
+              setData(result);
+            }
+          } catch (e) {}
+        });
+        
+      }
     });
   }, []);
 
@@ -260,22 +409,7 @@ export default function Content() {
   return (
     <div className="leverage-table">
       <MaterialTable
-        columns={[
-          { title: "Product", field: "product" },
-          { title: "Token Address", field: "token_address" },
-          { title: "Chain", field: "chain" },
-          { title: "Keeper Wallet", field: "keeper_wallet" },
-          { title: "Wallet Balance", field: "wallet_balance" },
-          { title: "Manager address", field: "manage_address" },
-          {
-            title: "FlexibleLeverageStrategyExtension address",
-            field: "strategy_extension_address",
-          },
-          { title: "Current Leverage Ratio", field: "current_leverage_ratio" },
-          { title: "Target Leverage", field: "target_leverage_ratio" },
-          { title: "Min Leverage", field: "min_leverage_ratio" },
-          { title: "Max Leverage", field: "max_leverage_ratio" },
-        ]}
+        columns={columns}
         data={data}
         title="Users Data"
         options={{ pageSize: 15 }}
