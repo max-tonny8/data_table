@@ -4,13 +4,18 @@ import Web3 from "web3";
 import eth_ABI from "../ABIs/eth_ABI.json";
 import poly_abI_1 from "../ABIs/poly_ABI_1.json";
 
+const ether_token_scan = "https://etherscan.io/token/";
+const ether_address_scan = "https://etherscan.io/address/";
+const polygon_token_scan = "https://polygonscan.com/token/";
+const polygon_address_scan = "https://polygonscan.com/address/";
 const fliTokenDetails = [
   {
     product: "icETH",
     token_address: "0x7c07f7abe10ce8e33dc6c5ad68fe033085256a84",
     keeper_address: "0xd17b4f16c7019eeE03D3fbCf709268998eD54d55",
-    manage_address: "0xb97f5a34696adf30db822612379235c3c53b714a ",
+    manage_address: "0xb97f5a34696adf30db822612379235c3c53b714a",
     strategy_extension_address: ["0xe6484a64e2ea165943c734dC498070b5902CBc2b"],
+    is_ethereum: true
   },
   {
     product: "ETH2x-FLI",
@@ -78,15 +83,17 @@ export default function Content() {
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState([
     { title: "Product", field: "product" },
-    { title: "Token Address", field: "token_address", render: rowData => <a href={"https://etherscan.io/address/"+rowData.token_address}>{rowData.token_address}</a> },
+    { title: "Token Address", field: "token_address", render: rowData => 
+      <a href={rowData.token_address_link}>{rowData.token_address}</a> 
+    },
     { title: "Chain", field: "chain" },
-    { title: "Keeper Wallet", field: "keeper_wallet", render: rowData => <a href={"https://etherscan.io/address/"+rowData.keeper_wallet}>{rowData.keeper_wallet}</a> },
+    { title: "Keeper Wallet", field: "keeper_wallet", render: rowData => <a href={rowData.keeper_wallet_link}>{rowData.keeper_wallet}</a> },
     { title: "Wallet Balance", field: "wallet_balance" },
-    { title: "Manager address", field: "manage_address", render: rowData => <a href={"https://etherscan.io/address/"+rowData.manage_address}>{rowData.manage_address}</a> },
+    { title: "Manager address", field: "manage_address", render: rowData => <a href={rowData.manage_address_link}>{rowData.manage_address}</a> },
     {
       title: "FlexibleLeverageStrategyExtension address",
       field: "strategy_extension_address",
-      render: rowData => <a href={"https://etherscan.io/address/"+rowData.strategy_extension_address}>{rowData.strategy_extension_address}</a> 
+      render: rowData => <a href={rowData.strategy_extension_address_link}>{rowData.strategy_extension_address}</a> 
     },
     { title: "Current Leverage Ratio", field: "current_leverage_ratio" },
     { title: "Target Leverage", field: "target_leverage_ratio" },
@@ -121,6 +128,10 @@ export default function Content() {
             result.push({
               product: item.product,
               token_address: item.token_address,
+              token_address_link: ether_token_scan + item.token_address,
+              keeper_wallet_link: ether_address_scan + item.keeper_address,
+              manage_address_link: ether_address_scan + item.manage_address,
+              strategy_extension_address_link: ether_address_scan + extension_address,
               chain: "Mainnet",
               keeper_wallet: item.keeper_address,
               wallet_balance: (bal / 10 ** 18).toFixed(4) + " ETH",
@@ -161,6 +172,10 @@ export default function Content() {
               product: item.product,
               token_address: item.token_address,
               chain: "Mainnet",
+              token_address_link: ether_token_scan + item.token_address,
+              keeper_wallet_link: ether_address_scan + item.keeper_address,
+              manage_address_link: ether_address_scan + item.manage_address,
+              strategy_extension_address_link: ether_address_scan + extension_address,
               keeper_wallet: item.keeper_address,
               wallet_balance: (bal / 10 ** 18).toFixed(4) + " ETH",
               manage_address: item.manage_address,
@@ -201,6 +216,10 @@ export default function Content() {
               token_address: item.token_address,
               chain: "Mainnet",
               keeper_wallet: item.keeper_address,
+              token_address_link: ether_token_scan + item.token_address,
+              keeper_wallet_link: ether_address_scan + item.keeper_address,
+              manage_address_link: ether_address_scan + item.manage_address,
+              strategy_extension_address_link: ether_address_scan + extension_address,
               wallet_balance: (bal / 10 ** 18).toFixed(4) + " ETH",
               manage_address: item.manage_address,
               strategy_extension_address: extension_address,
@@ -240,6 +259,10 @@ export default function Content() {
               product: item.product,
               token_address: item.token_address,
               chain: "Polygon",
+              token_address_link: polygon_token_scan + item.token_address,
+              keeper_wallet_link: polygon_address_scan + item.keeper_address,
+              manage_address_link: polygon_address_scan + item.manage_address,
+              strategy_extension_address_link: polygon_address_scan + extension_address,
               keeper_wallet: item.keeper_address,
               wallet_balance: (bal / 10 ** 18).toFixed(4) + " MATIC",
               manage_address: item.manage_address,
@@ -276,6 +299,10 @@ export default function Content() {
               product: item.product,
               token_address: item.token_address,
               chain: "Polygon",
+              token_address_link: polygon_token_scan + item.token_address,
+              keeper_wallet_link: polygon_address_scan + item.keeper_address,
+              manage_address_link: polygon_address_scan + item.manage_address,
+              strategy_extension_address_link: polygon_address_scan + extension_address,
               keeper_wallet: item.keeper_address,
               wallet_balance: (bal / 10 ** 18).toFixed(4) + " MATIC",
               manage_address: item.manage_address,
@@ -313,6 +340,10 @@ export default function Content() {
               product: item.product,
               token_address: item.token_address,
               chain: "Polygon",
+              token_address_link: polygon_token_scan + item.token_address,
+              keeper_wallet_link: polygon_address_scan + item.keeper_address,
+              manage_address_link: polygon_address_scan + item.manage_address,
+              strategy_extension_address_link: polygon_address_scan + extension_address,
               keeper_wallet: item.keeper_address,
               wallet_balance: (bal / 10 ** 18).toFixed(4) + " MATIC",
               manage_address: item.manage_address,
@@ -350,6 +381,10 @@ export default function Content() {
               product: item.product,
               token_address: item.token_address,
               chain: "Polygon",
+              token_address_link: polygon_token_scan + item.token_address,
+              keeper_wallet_link: polygon_address_scan + item.keeper_address,
+              manage_address_link: polygon_address_scan + item.manage_address,
+              strategy_extension_address_link: polygon_address_scan + extension_address,
               keeper_wallet: item.keeper_address,
               wallet_balance: (bal / 10 ** 18).toFixed(4) + " MATIC",
               manage_address: item.manage_address,
@@ -385,6 +420,10 @@ export default function Content() {
               .call();
             result.push({
               product: item.product,
+              token_address_link: polygon_token_scan + item.token_address,
+              keeper_wallet_link: polygon_address_scan + item.keeper_address,
+              manage_address_link: polygon_address_scan + item.manage_address,
+              strategy_extension_address_link: polygon_address_scan + extension_address,
               token_address: item.token_address,
               chain: "Polygon",
               keeper_wallet: item.keeper_address,
@@ -424,6 +463,10 @@ export default function Content() {
               product: item.product,
               token_address: item.token_address,
               chain: "Polygon",
+              token_address_link: polygon_token_scan + item.token_address,
+              keeper_wallet_link: polygon_address_scan + item.keeper_address,
+              manage_address_link: polygon_address_scan + item.manage_address,
+              strategy_extension_address_link: polygon_address_scan + extension_address,
               keeper_wallet: item.keeper_address,
               wallet_balance: (bal / 10 ** 18).toFixed(4) + " MATIC",
               manage_address: item.manage_address,
