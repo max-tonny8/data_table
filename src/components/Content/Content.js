@@ -122,6 +122,10 @@ export default function Content() {
               eth_ABI,
               extension_address
             );
+            const leverage_ratio = await eth_instance.methods
+            .getCurrentLeverageRatio()
+            .call();
+
             const leverage_data = await eth_instance.methods
               .getMethodology()
               .call();
@@ -138,7 +142,7 @@ export default function Content() {
               manage_address: item.manage_address,
               strategy_extension_address: extension_address,
               current_leverage_ratio:
-                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              (leverage_ratio / 10 ** 18).toFixed(4) + "x",
               target_leverage_ratio:
                 leverage_data.targetLeverageRatio / 10 ** 18 + "x",
               min_leverage_ratio:
@@ -165,6 +169,9 @@ export default function Content() {
               eth_ABI,
               extension_address
             );
+            const leverage_ratio = await eth_instance.methods
+            .getCurrentLeverageRatio()
+            .call();
             const leverage_data = await eth_instance.methods
               .getMethodology()
               .call();
@@ -181,7 +188,7 @@ export default function Content() {
               manage_address: item.manage_address,
               strategy_extension_address: extension_address,
               current_leverage_ratio:
-                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              (leverage_ratio / 10 ** 18).toFixed(4) + "x",
               target_leverage_ratio:
                 leverage_data.targetLeverageRatio / 10 ** 18 + "x",
               min_leverage_ratio:
@@ -208,6 +215,9 @@ export default function Content() {
               eth_ABI,
               extension_address
             );
+            const leverage_ratio = await eth_instance.methods
+            .getCurrentLeverageRatio()
+            .call();
             const leverage_data = await eth_instance.methods
               .getMethodology()
               .call();
@@ -224,7 +234,7 @@ export default function Content() {
               manage_address: item.manage_address,
               strategy_extension_address: extension_address,
               current_leverage_ratio:
-                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              (leverage_ratio / 10 ** 18).toFixed(4) + "x",
               target_leverage_ratio:
                 leverage_data.targetLeverageRatio / 10 ** 18 + "x",
               min_leverage_ratio:
@@ -252,6 +262,9 @@ export default function Content() {
               poly_abI_1,
               extension_address
             );
+            const leverage_ratio = await pol_instance.methods
+            .getCurrentLeverageRatio()
+            .call();
             const leverage_data = await pol_instance.methods
               .getMethodology()
               .call();
@@ -268,7 +281,7 @@ export default function Content() {
               manage_address: item.manage_address,
               strategy_extension_address: extension_address,
               current_leverage_ratio:
-                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              (leverage_ratio / 10 ** 18).toFixed(4) + "x",
               target_leverage_ratio:
                 leverage_data.targetLeverageRatio / 10 ** 18 + "x",
               min_leverage_ratio:
@@ -292,6 +305,9 @@ export default function Content() {
               eth_ABI,
               extension_address
             );
+            const leverage_ratio = await pol_instance.methods
+            .getCurrentLeverageRatio()
+            .call();
             const leverage_data = await pol_instance.methods
               .getMethodology()
               .call();
@@ -308,7 +324,7 @@ export default function Content() {
               manage_address: item.manage_address,
               strategy_extension_address: extension_address,
               current_leverage_ratio:
-                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              (leverage_ratio / 10 ** 18).toFixed(4) + "x",
               target_leverage_ratio:
                 leverage_data.targetLeverageRatio / 10 ** 18 + "x",
               min_leverage_ratio:
@@ -333,6 +349,9 @@ export default function Content() {
               eth_ABI,
               extension_address
             );
+            const leverage_ratio = await pol_instance.methods
+            .getCurrentLeverageRatio()
+            .call();
             const leverage_data = await pol_instance.methods
               .getMethodology()
               .call();
@@ -349,7 +368,7 @@ export default function Content() {
               manage_address: item.manage_address,
               strategy_extension_address: extension_address,
               current_leverage_ratio:
-                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              (leverage_ratio / 10 ** 18).toFixed(4) + "x",
               target_leverage_ratio:
                 leverage_data.targetLeverageRatio / 10 ** 18 + "x",
               min_leverage_ratio:
@@ -374,6 +393,9 @@ export default function Content() {
               eth_ABI,
               extension_address
             );
+            const leverage_ratio = await pol_instance.methods
+            .getCurrentLeverageRatio()
+            .call();
             const leverage_data = await pol_instance.methods
               .getMethodology()
               .call();
@@ -390,7 +412,7 @@ export default function Content() {
               manage_address: item.manage_address,
               strategy_extension_address: extension_address,
               current_leverage_ratio:
-                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              (leverage_ratio / 10 ** 18).toFixed(4) + "x",
               target_leverage_ratio:
                 leverage_data.targetLeverageRatio / 10 ** 18 + "x",
               min_leverage_ratio:
@@ -415,6 +437,9 @@ export default function Content() {
               eth_ABI,
               extension_address
             );
+            const leverage_ratio = await pol_instance.methods
+            .getCurrentLeverageRatio()
+            .call();
             const leverage_data = await pol_instance.methods
               .getMethodology()
               .call();
@@ -431,7 +456,7 @@ export default function Content() {
               manage_address: item.manage_address,
               strategy_extension_address: extension_address,
               current_leverage_ratio:
-                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              (leverage_ratio / 10 ** 18).toFixed(4) + "x",
               target_leverage_ratio:
                 leverage_data.targetLeverageRatio / 10 ** 18 + "x",
               min_leverage_ratio:
@@ -456,6 +481,9 @@ export default function Content() {
               eth_ABI,
               extension_address
             );
+            const leverage_ratio = await pol_instance.methods
+            .getCurrentLeverageRatio()
+            .call();
             const leverage_data = await pol_instance.methods
               .getMethodology()
               .call();
@@ -472,7 +500,7 @@ export default function Content() {
               manage_address: item.manage_address,
               strategy_extension_address: extension_address,
               current_leverage_ratio:
-                leverage_data.recenteringSpeed / 10 ** 18 + "x",
+              (leverage_ratio / 10 ** 18).toFixed(4) + "x",
               target_leverage_ratio:
                 leverage_data.targetLeverageRatio / 10 ** 18 + "x",
               min_leverage_ratio:
